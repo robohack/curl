@@ -2292,6 +2292,10 @@ CURLMcode curl_multi_cleanup(struct Curl_multi *multi)
         data->psl = NULL;
 #endif
 
+      if(data->set.dohfor)
+        /* a DOH handle left-over to clean up */
+        Curl_close(data);
+
       data = nextdata;
     }
 
